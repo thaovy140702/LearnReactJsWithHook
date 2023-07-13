@@ -47,6 +47,7 @@ const NewCountDown = () => {
 
  
 
-  return <div>{count}</div>;
+  return <div>
+    {count}</div>;
 };
 export { Countdown, NewCountDown };

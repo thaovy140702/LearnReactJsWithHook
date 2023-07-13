@@ -4,8 +4,14 @@ import Navigation from "./views/Navigation";
 import Covid from "./views/Covid";
 import Todo from "./views/Todo";
 import { Countdown, NewCountDown } from "./views/Countdown";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Blog from "./views/Blog";
+import DetailBlog from "./views/DetailBlog";
+import AddNewBlog from "./views/AddNewBlog";
+import NotFound from "./views/NotFound";
+import YoutubeSearch from "./views/YoutubeSearch";
+import DetailVideoYoutube from "./views/DetailVideoYoutube";
 
 const App = () => {
   const [address, setAddress] = useState("");
@@ -17,7 +23,7 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    console.log("useEffect");
+    
   }, [address]);
 
   const handleEventClick = () => {
@@ -46,19 +52,21 @@ const App = () => {
     // alert("Times up")
   };
   return (
-    <div className="App">
-      <header className="App-header">
-        <Navigation />
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <Navigation />
 
-        <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" />
 
-        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Covid />} />
             <Route
               path="/timer"
               element={
                 <>
+                  {" "}
+                  <h4>Countdown</h4>
                   <Countdown setTimeUp={setTimeUp} />
                   <span>-----------------------------------</span>
                   <NewCountDown />
@@ -91,10 +99,16 @@ const App = () => {
                 </>
               }
             />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<DetailBlog/>} />
+            <Route path="/add-new-blog" element={ <AddNewBlog />} />
+            <Route path="/youtube" element={ <YoutubeSearch />} />
+            <Route path="/youtube/:id" element={ <DetailVideoYoutube />} />
+            <Route path="*" element={ <NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </header>
-    </div>
+        </header>
+      </div>
+    </BrowserRouter>
   );
 };
 
